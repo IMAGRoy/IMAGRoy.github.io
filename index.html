@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Canvas Touch Trail Demo</title>
+    <title>Canvas Touch Trail with Image Demo</title>
     <style>
         body, html {
           margin: 0;
@@ -25,29 +25,30 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // 跟隨光點的效果
-        function drawLight(x, y) {
-            ctx.beginPath();
-            ctx.arc(x, y, 20, 0, 2 * Math.PI, false);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.fill();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = '#003300';
-            ctx.stroke();
+        // 加載圖片
+        var image = new Image();
+        image.src = './light.png';
+
+        // 繪製圖片並創建拖曳效果
+        function drawImageTrail(x, y) {
+            // 清除 Canvas，但留下一些殘影
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'; // 調整這裡的 alpha 值以控制殘影長度
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 繪製圖片
+            ctx.drawImage(image, x - image.width / 2, y - image.height / 2);
         }
 
         // 處理觸摸移動事件
         function touchMove(e) {
             e.preventDefault();
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
             var touch = e.touches[0];
-            drawLight(touch.pageX, touch.pageY);
+            drawImageTrail(touch.pageX, touch.pageY);
         }
 
         // 處理滑鼠移動事件
         function mouseMove(e) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawLight(e.clientX, e.clientY);
+            drawImageTrail(e.clientX, e.clientY);
         }
 
         // 監聽觸摸和滑鼠事件
