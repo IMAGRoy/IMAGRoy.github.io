@@ -29,14 +29,19 @@
         var image = new Image();
         image.src = './light.png';
 
+        // 圖片縮放比例
+        var scale = 0.05; // 調整這個值以改變圖片大小
+
         // 繪製圖片並創建拖曳效果
         function drawImageTrail(x, y) {
             // 清除 Canvas，但留下一些殘影
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'; // 調整這裡的 alpha 值以控制殘影長度
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)'; // 減少 alpha 值以增加尾巴長度
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 繪製圖片
-            ctx.drawImage(image, x - image.width / 2, y - image.height / 2);
+            // 繪製圖片，並根據 scale 調整大小
+            var scaledWidth = image.width * scale;
+            var scaledHeight = image.height * scale;
+            ctx.drawImage(image, x - scaledWidth / 2, y - scaledHeight / 2, scaledWidth, scaledHeight);
         }
 
         // 處理觸摸移動事件
