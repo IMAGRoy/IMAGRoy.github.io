@@ -87,7 +87,24 @@
     function createTail(x, y) {
         var styleImg = document.createElement("div");
         var r = randomNum(1,5);
-        // ... 其他代碼保持不變 ...
+        switch (r) {
+            case 1:
+                //设置图片的路径,根据不同的路径就可以更改成不同的样式
+                styleImg.innerHTML="<img src='./light.png' style='width: 50px;height: auto;'/>"
+                break;
+            case 2:
+                styleImg.innerHTML="<img src='./light.png' style='width: 50px;height: auto;'/>"
+                break;
+            case 3:
+                styleImg.innerHTML="<img src='./light.png' style='width: 50px;height: auto;'/>"
+                break;
+            case 4:
+                styleImg.innerHTML="<img src='./light.png' style='width: 50px;height: auto;'/>"
+                break;
+            case 5:
+                styleImg.innerHTML="<img src='./light.png' style='width: 50px;height: auto;'/>"
+                break;
+        }
     
         styleImg.style.position = 'absolute';
         styleImg.style.top = y + "px";
