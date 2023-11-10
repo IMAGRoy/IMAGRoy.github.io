@@ -7,6 +7,7 @@
           margin: 0;
           padding: 0;
           overflow: hidden;
+          background-color: #FFF;
         }
         canvas {
           position: absolute;
@@ -21,42 +22,50 @@
         var canvas = document.getElementById('myCanvas');
         var ctx = canvas.getContext('2d');
 
-        // 設置 canvas 大小為視窗大小
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // 加載圖片
         var image = new Image();
         image.src = './light.png';
 
-        // 圖片縮放比例
-        var scale = 0.05; // 調整這個值以改變圖片大小
+        var scale = 0.05;
+        var lastX, lastY;
+        var trailTimeout;
 
-        // 繪製圖片並創建拖曳效果
         function drawImageTrail(x, y) {
-            // 清除 Canvas，但留下一些殘影
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)'; // 減少 alpha 值以增加尾巴長度
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 繪製圖片，並根據 scale 調整大小
             var scaledWidth = image.width * scale;
             var scaledHeight = image.height * scale;
             ctx.drawImage(image, x - scaledWidth / 2, y - scaledHeight / 2, scaledWidth, scaledHeight);
+
+            lastX = x;
+            lastY = y;
         }
 
-        // 處理觸摸移動事件
+        function fadeTrail() {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            if (lastX !== undefined && lastY !== undefined) {
+                drawImageTrail(lastX, lastY);
+            }
+        }
+
         function touchMove(e) {
             e.preventDefault();
             var touch = e.touches[0];
             drawImageTrail(touch.pageX, touch.pageY);
+            clearTimeout(trailTimeout);
+            trailTimeout = setTimeout(fadeTrail, 100);
         }
 
-        // 處理滑鼠移動事件
         function mouseMove(e) {
             drawImageTrail(e.clientX, e.clientY);
+            clearTimeout(trailTimeout);
+            trailTimeout = setTimeout(fadeTrail, 100);
         }
 
-        // 監聽觸摸和滑鼠事件
         canvas.addEventListener('touchmove', touchMove, false);
         canvas.addEventListener('mousemove', mouseMove, false);
     </script>
