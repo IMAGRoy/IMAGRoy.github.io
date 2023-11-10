@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 添加 viewport 元態標籤 -->
     <title>Title</title>
-<style>
-    /*div样式*/
-    #main{
-        width: auto;height: 1500px;margin: 0;background-color: black;
-    }
-</style>
+    <style>
+        /* 修改 div 樣式以填滿整個視窗 */
+        #main {
+            position: fixed; /* 使用 fixed 位置 */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            overflow: hidden; /* 防止內容超出時出現滾動條 */
+        }
+    </style>
 </head>
 <body>
         <div id="main"></div>
