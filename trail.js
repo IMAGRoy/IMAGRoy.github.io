@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const numberOfElements = 50; // 增加軌跡元素的數量
+    const numberOfElements = 50; // 軌跡元素的數量
     const elements = [];
-    const delay = 2; // 增加更新延遲
+    const delay = 2; // 控制更新頻率
     let updateCounter = 0;
 
     for (let i = 0; i < numberOfElements; i++) {
-        let el = document.createElement('img');
-        el.src = './light.png';
+        let el = document.createElement('div');
         el.className = 'trail';
+        el.style.left = '-9999px'; // 初始位置設置為頁面外
+        el.style.top = '-9999px';  // 初始位置設置為頁面外
         document.body.appendChild(el);
         elements.push(el);
     }
@@ -16,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updatePosition(x, y) {
         let el = elements[current];
-        el.style.left = (x - el.width / 2) + 'px';
-        el.style.top = (y - el.height / 2) + 'px';
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
         current = (current + 1) % numberOfElements;
     }
 
