@@ -7,7 +7,7 @@
           margin: 0;
           padding: 0;
           overflow: hidden;
-          background-color: #FFF;
+          background-color: #000;
         }
         canvas {
           position: absolute;
@@ -28,13 +28,13 @@
         var image = new Image();
         image.src = './light.png';
 
-        var scale = 0.05;
+        var scale = 0.03;
         var lastX, lastY;
         var trailTimeout;
 
         function drawImageTrail(x, y) {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            // ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             var scaledWidth = image.width * scale;
             var scaledHeight = image.height * scale;
@@ -45,7 +45,7 @@
         }
 
         function fadeTrail() {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)'; // 增加 alpha 值以加強覆蓋效果
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             if (lastX !== undefined && lastY !== undefined) {
                 drawImageTrail(lastX, lastY);
@@ -57,13 +57,13 @@
             var touch = e.touches[0];
             drawImageTrail(touch.pageX, touch.pageY);
             clearTimeout(trailTimeout);
-            trailTimeout = setTimeout(fadeTrail, 100);
+            trailTimeout = setTimeout(fadeTrail, 15);
         }
 
         function mouseMove(e) {
             drawImageTrail(e.clientX, e.clientY);
             clearTimeout(trailTimeout);
-            trailTimeout = setTimeout(fadeTrail, 100);
+            trailTimeout = setTimeout(fadeTrail, 15);
         }
 
         canvas.addEventListener('touchmove', touchMove, false);
