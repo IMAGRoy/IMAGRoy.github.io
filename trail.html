@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Trail with Image</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+        .trail { 
+            position: absolute; 
+            height: 20px; /* 根據需要調整大小 */
+            width: 20px;  /* 根據需要調整大小 */
+            pointer-events: none; 
+            opacity: 0.6; /* 可以調整透明度 */
+        }
+    </style>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const numberOfElements = 20; // 軌跡元素的數量
+            const elements = [];
+
+            for (let i = 0; i < numberOfElements; i++) {
+                let el = document.createElement('img');
+                el.src = './light.png'; // 指定圖片路徑
+                el.className = 'trail';
+                document.body.appendChild(el);
+                elements.push(el);
+            }
+
+            let current = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                let el = elements[current];
+                el.style.left = (e.pageX - el.width / 2) + 'px';
+                el.style.top = (e.pageY - el.height / 2) + 'px';
+                current = (current + 1) % numberOfElements;
+            });
+        });
+
+    </script>
+</body>
+</html>
