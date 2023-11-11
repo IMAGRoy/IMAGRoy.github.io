@@ -14,22 +14,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         ctx.beginPath();
-        ctx.strokeStyle = 'white'; // 線條顏色
-        ctx.lineWidth = 2; // 線條寬度
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 5;
         ctx.moveTo(lastX, lastY);
         ctx.lineTo(x, y);
         ctx.stroke();
+
+        // 決定是否在這個點放置圖片
+        if (Math.random() < 1) { // 80% 的機率
+            placeImage(x, y);
+        }
 
         lastX = x;
         lastY = y;
     }
 
+    function placeImage(x, y) {
+        const img = new Image();
+        img.src = './light.png';
+        img.onload = () => {
+            // 設置圖片的新尺寸
+            const scaledWidth = img.width * 0.03; // 這裡將圖片寬度縮小為原來的50%
+            const scaledHeight = img.height * 0.03; // 這裡將圖片高度縮小為原來的50%
+    
+            // 繪製圖片
+            ctx.drawImage(img, x - scaledWidth / 2, y - scaledHeight / 2, scaledWidth, scaledHeight);
+        };
+    }
+    
+
     function fadeOut() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // 半透明的黑色覆蓋層
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    setInterval(fadeOut, 100); // 每100毫秒降低一次透明度
+    setInterval(fadeOut, 50);
 
     document.addEventListener('mousemove', (e) => {
         drawLine(e.clientX, e.clientY);
