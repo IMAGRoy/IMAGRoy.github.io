@@ -102,8 +102,8 @@ for (var i = 0; i <= sparkCount; i += 1) {
     container.appendChild(dot);
     spark.els.push(dot);
 
-    var particleSize = anime.random(25, 100); // 調整粒子大小範圍
-    var sparkRadius = 100; // 增加粒子的半徑範圍
+    var particleSize = anime.random(40, 80); // 調整粒子大小範圍
+    var sparkRadius = 50; // 增加粒子的半徑範圍
     var { x, y, r } = circularRandom(sparkRadius);
     dot.style.width = lerp(particleSize, 5, ease.outQuad(r / sparkRadius)) + "px";
     dot.style.height = lerp(particleSize, 5, ease.outQuad(r / sparkRadius)) + "px";
@@ -135,10 +135,10 @@ for (var i = 0; i <= sparkCount; i += 1) {
         }
     ],
     width: [
-        { value: 150, duration: 1500 }, // 初始大小和持續時間
+        { value: 90, duration: 1500 }, // 初始大小和持續時間
     ],
     height: [
-        { value: 150, duration: 1500 }, // 初始大小和持續時間
+        { value: 90, duration: 1500 }, // 初始大小和持續時間
     ],
     translateX: [
         { value: function () { return anime.random(-30, 30); }, duration: 1500 },
