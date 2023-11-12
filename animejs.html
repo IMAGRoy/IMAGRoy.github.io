@@ -43,7 +43,7 @@ var sparksIndex = 0;
 
 var a = 10;
 // I did a test and it seems mousemove only fires every frame (screen refresh), so sparkCount should be more than the frames a sec they get (so 60 for me).
-var sparkCount = 100;
+var sparkCount = 200;
 var sparkParticleCount = 6;
 
 function lerp(p1, p2, t) {
@@ -136,24 +136,18 @@ for (var i = 0; i <= sparkCount; i += 1) {
     ],
     width: [
         { value: 150, duration: 1500 }, // 初始大小和持續時間
-        { value: 10, duration: 1500 } // 結尾階段的大小和持續時間
     ],
     height: [
         { value: 150, duration: 1500 }, // 初始大小和持續時間
-        { value: 10, duration: 1500 } // 結尾階段的大小和持續時間
     ],
-    translateX: {
-        value: function () {
-            return anime.random(-30, 30);
-        },
-        duration: 2000 // 增加持續時間
-    },
-    translateY: {
-        value: function () {
-            return anime.random(-30, 30);
-        },
-        duration: 2000 // 增加持續時間
-    }
+    translateX: [
+        { value: function () { return anime.random(-30, 30); }, duration: 1500 },
+        { value: 0, duration: 0 } // 新增階段，將 translateX 重置為 0
+    ],
+    translateY: [
+        { value: function () { return anime.random(-30, 30); }, duration: 1500 },
+        { value: 0, duration: 0 } // 新增階段，將 translateY 重置為 0
+    ]
   });
   sparks.push(spark);
 }
