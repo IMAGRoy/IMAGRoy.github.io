@@ -142,11 +142,11 @@ for (var i = 0; i <= sparkCount; i += 1) {
     ],
     translateX: [
         { value: function () { return anime.random(-30, 30); }, duration: 1500 },
-        { value: 0, duration: 0 } // 新增階段，將 translateX 重置為 0
+        { value: function () { return anime.random(-10, 10); }, duration: 0 } // 新增階段，將 translateX 重置為 0
     ],
     translateY: [
         { value: function () { return anime.random(-30, 30); }, duration: 1500 },
-        { value: 0, duration: 0 } // 新增階段，將 translateY 重置為 0
+        { value: function () { return anime.random(-10, 10); }, duration: 0 } // 新增階段，將 translateY 重置為 0
     ]
   });
   sparks.push(spark);
