@@ -25,8 +25,8 @@
             border-radius: 50%;
             background-image: url('./light.png'); /* 設置背景圖片 */
             background-size: cover; /* 確保圖片覆蓋整個元素 */
-            width: 50px; /* 根據您的圖片大小調整 */
-            height: 50px; /* 根據您的圖片大小調整 */
+            width: 25px; /* 根據您的圖片大小調整 */
+            height: 25px; /* 根據您的圖片大小調整 */
         }
 
     </style>
@@ -103,6 +103,10 @@ for (var i = 0; i <= sparkCount; i += 1) {
     container.appendChild(dot);
     spark.els.push(dot);
 
+    // 隨機選擇背景圖片
+    var randomImageNumber = anime.random(1, 3); // 生成 1 到 3 之間的隨機數
+    dot.style.backgroundImage = "url('./light" + randomImageNumber + ".png')";
+
     var particleSize = anime.random(40, 80); // 調整粒子大小範圍
     var sparkRadius = 50; // 增加粒子的半徑範圍
     var { x, y, r } = circularRandom(sparkRadius);
@@ -128,28 +132,22 @@ for (var i = 0; i <= sparkCount; i += 1) {
     opacity: [
         { value: 0, duration: 0 },
         { value: 1, duration: 40 },
-        {
-            value: 0,
-            duration: function () {
-                return anime.random(1000, 2500); // 增加持續時間
-            }
-        }
+        { value: 0, duration: function () { return anime.random(1000, 2000); } }
     ],
     width: [
-        { value: 90, duration: 1500 }, // 初始大小和持續時間
+        { value: 40, duration: 1500 }, // 保持大小不變
     ],
     height: [
-        { value: 90, duration: 1500 }, // 初始大小和持續時間
+        { value: 40, duration: 1500 }, // 保持大小不變
     ],
     translateX: [
-        { value: function () { return anime.random(-30, 30); }, duration: 1500 },
-        { value: function () { return anime.random(-10, 10); }, duration: 0 } // 新增階段，將 translateX 重置為 0
+        { value: 0, duration: 1500 }, // 保持位置不變
     ],
     translateY: [
-        { value: function () { return anime.random(-30, 30); }, duration: 1500 },
-        { value: function () { return anime.random(-10, 10); }, duration: 0 } // 新增階段，將 translateY 重置為 0
+        { value: 0, duration: 1500 }, // 保持位置不變
     ]
   });
+
   sparks.push(spark);
 }
 
